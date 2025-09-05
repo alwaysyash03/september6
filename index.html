@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 6 of Birthday</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad390, #fbc2eb);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+      background: linear-gradient(90deg, #ff6a00, #ee0979, #ff6a00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glow 3s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #fff; }
+      to { text-shadow: 0 0 20px #ff9a9e, 0 0 30px #fad390; }
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      max-width: 420px;
+      margin: auto;
+      backdrop-filter: blur(10px);
+    }
+
+    .frame {
+      width: 100%;
+      height: 250px;
+      border: 4px solid transparent;
+      border-image: linear-gradient(45deg, #ff6a00, #ee0979, #ff6a00) 1;
+      border-radius: 15px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .frame img:hover {
+      transform: scale(1.05);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 22px;
+      background: linear-gradient(45deg, #ff6a00, #ee0979, #ff6a00);
+      background-size: 200% auto;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 30px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-position 0.5s, transform 0.2s;
+    }
+
+    .btn:hover {
+      background-position: right center;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Day 6 of Birthday 🎂</h1>
+    <div class="card">
+      <div class="frame">
+        <img src="ss.png" alt="Birthday Image">
+      </div>
+      <a href="song.html" class="btn">Celebrate 🎉</a>
+    </div>
+  </div>
+</body>
+</html>
+

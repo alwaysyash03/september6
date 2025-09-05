@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Priyankaaa💫 🎉</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+        
+        .dancing-script { font-family: 'Dancing Script', cursive; }
+        .poppins { font-family: 'Poppins', sans-serif; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .float { animation: float 3s ease-in-out infinite; }
+        .sparkle { animation: sparkle 2s ease-in-out infinite; }
+        .fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .music-wave {
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(to top, #ff6b6b, #feca57);
+            margin: 0 2px;
+            border-radius: 2px;
+            animation: wave 1s ease-in-out infinite;
+        }
+        
+        .music-wave:nth-child(2) { animation-delay: 0.1s; }
+        .music-wave:nth-child(3) { animation-delay: 0.2s; }
+        .music-wave:nth-child(4) { animation-delay: 0.3s; }
+        .music-wave:nth-child(5) { animation-delay: 0.4s; }
+        
+        @keyframes wave {
+            0%, 100% { height: 20px; }
+            50% { height: 40px; }
+        }
+        
+        .heart {
+            color: #ff6b6b;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .wish-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .active-song {
+            background: rgba(168, 85, 247, 0.3);
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-white overflow-x-hidden">
+    <div class="fixed inset-0 pointer-events-none z-0">
+        <div class="heart absolute top-20 left-10 text-2xl float">💖</div>
+        <div class="heart absolute top-40 right-20 text-3xl float" style="animation-delay: 1s;">💕</div>
+        <div class="heart absolute bottom-40 left-20 text-2xl float" style="animation-delay: 2s;">💗</div>
+        <div class="heart absolute bottom-20 right-10 text-3xl float" style="animation-delay: 0.5s;">💝</div>
+        <div class="sparkle absolute top-32 left-1/4 text-yellow-300 text-xl">✨</div>
+        <div class="sparkle absolute top-60 right-1/3 text-yellow-300 text-2xl" style="animation-delay: 1s;">⭐</div>
+        <div class="sparkle absolute bottom-32 left-1/3 text-yellow-300 text-xl" style="animation-delay: 2s;">✨</div>
+    </div>
+
+    <div class="relative z-10 container mx-auto px-4 py-8">
+        <header class="text-center mb-12 fade-in-up">
+            <h1 class="dancing-script text-6xl md:text-8xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-300">
+                Happy 19th Birthday
+            </h1>
+            <h2 class="dancing-script text-4xl md:text-6xl font-semibold text-yellow-300 mb-6">
+                Priyankaaa💫 🎂
+            </h2>
+            <div class="flex justify-center space-x-4 text-4xl">
+                <span class="sparkle">🎉</span>
+                <span class="sparkle" style="animation-delay: 0.5s;">🎈</span>
+                <span class="sparkle" style="animation-delay: 1s;">🎊</span>
+                <span class="sparkle" style="animation-delay: 1.5s;">🎁</span>
+            </div>
+        </header>
+
+        <div class="max-w-md mx-auto mb-12 fade-in-up" style="animation-delay: 0.3s;">
+            <div class="wish-card rounded-2xl p-6 text-center">
+                <h3 class="poppins text-xl font-semibold mb-4 text-pink-300">🎵 Sad Love Songs for Your Heart 🎵</h3>
+                
+                <div class="flex justify-center items-center mb-4" id="musicVisualizer">
+                    <div class="music-wave"></div>
+                    <div class="music-wave"></div>
+                    <div class="music-wave"></div>
+                    <div class="music-wave"></div>
+                    <div class="music-wave"></div>
+                </div>
+                
+                <div class="mb-4">
+                    <p class="poppins text-sm text-gray-300 mb-1">Now Playing:</p>
+                    <p class="poppins font-medium text-lg" id="currentSong"></p>
+                </div>
+                
+                <div class="flex justify-center items-center space-x-4 mb-4">
+                    <button onclick="previousSong()" class="bg-pink-500 hover:bg-pink-600 rounded-full p-3 transition-colors">
+                        <span class="text-xl">⏮️</span>
+                    </button>
+                    <button onclick="togglePlay()" id="playButton" class="bg-purple-500 hover:bg-purple-600 rounded-full p-4 transition-colors">
+                        <span class="text-2xl" id="playIcon">▶️</span>
+                    </button>
+                    <button onclick="nextSong()" class="bg-pink-500 hover:bg-pink-600 rounded-full p-3 transition-colors">
+                        <span class="text-xl">⏭️</span>
+                    </button>
+                </div>
+                
+                <div class="text-left">
+                    <p class="poppins text-sm text-gray-300 mb-2">Playlist:</p>
+                    <div class="space-y-1 text-sm" id="playlist">
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-2xl mx-auto mb-12 fade-in-up" style="animation-delay: 0.6s;">
+            <div class="wish-card rounded-2xl p-8 text-center" id="wishCard">
+                <h3 class="dancing-script text-3xl font-bold mb-4 text-yellow-300">Birthday Wish 💝</h3>
+                <p class="poppins text-lg leading-relaxed" id="currentWish">
+                    </p>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 mb-12 fade-in-up" style="animation-delay: 0.9s;">
+            <div class="wish-card rounded-2xl p-6 text-center cursor-pointer hover:scale-105 transition-transform" onclick="blowCandles()">
+                <div class="text-6xl mb-4" id="cake">🎂</div>
+                <h4 class="poppins font-semibold text-lg mb-2">Make a Wish!</h4>
+                <p class="poppins text-sm text-gray-300">Click to blow the candles</p>
+            </div>
+            
+            <div class="wish-card rounded-2xl p-6 text-center cursor-pointer hover:scale-105 transition-transform" onclick="popBalloons()">
+                <div class="text-6xl mb-4" id="balloons">🎈🎈🎈</div>
+                <h4 class="poppins font-semibold text-lg mb-2">Pop the Balloons!</h4>
+                <p class="poppins text-sm text-gray-300">Click for a surprise</p>
+            </div>
+            
+            <div class="wish-card rounded-2xl p-6 text-center cursor-pointer hover:scale-105 transition-transform" onclick="openGift()">
+                <div class="text-6xl mb-4" id="gift">🎁</div>
+                <h4 class="poppins font-semibold text-lg mb-2">Open Your Gift!</h4>
+                <p class="poppins text-sm text-gray-300">Click to unwrap</p>
+            </div>
+        </div>
+
+        <div class="text-center fade-in-up" style="animation-delay: 1.2s;">
+            <div class="wish-card rounded-2xl p-8 max-w-3xl mx-auto">
+                <h3 class="dancing-script text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-300">
+                    Let's Celebrate! 🎉
+                </h3>
+                <p class="poppins text-lg mb-6 leading-relaxed">
+                    Today is all about you, Priyankaaa💫 May this new year of your life be filled with love, laughter, and all the beautiful music your heart desires. Even in the saddest songs, there's beauty - just like how you bring light to every moment! 
+                </p>
+                <div class="flex justify-center space-x-2 text-3xl">
+                    <span class="sparkle">🌟</span>
+                    <span class="heart">💖</span>
+                    <span class="sparkle" style="animation-delay: 0.5s;">🌟</span>
+                    <span class="heart" style="animation-delay: 0.3s;">💖</span>
+                    <span class="sparkle" style="animation-delay: 1s;">🌟</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <audio id="audioPlayer"></audio>
+
+    <script>
+        const songs = [
+            {
+                title: "Baarish - Half Girlfriend",
+                src: "./baarish.mp3", // <--- REPLACE WITH ACTUAL URL
+                wish: "Dear Priyankaaa💫, may your birthday be filled with beautiful melodies and endless joy! Even though these songs are sad, your smile can light up any darkness. Have the most amazing day! 🎂✨"
+            },
+            {
+                title: "Kaun Tujhe - MS Dhoni",
+                src: "./kaun tuje.mp3", // <--- REPLACE WITH ACTUAL URL
+                wish: "Happy Birthday, Priyankaaa💫 💕 Like this beautiful song, may you find love and happiness in every moment. Your special day deserves all the magic in the world! 🌟"
+            },
+            {
+                title: "Raabta - Raabta",
+                src: "./raabta.m4a", // <--- REPLACE WITH ACTUAL URL
+                wish: "Priyankaaa💫, on your birthday, may you feel the deep connection with all the beautiful things in life! 🌙 Your heart is as pure as this melody. Celebrate big today! 🎊"
+            },
+            {
+                title: "Thodi der - Half Girlfriend",
+                src: "./thodi der.m4a", // <--- REPLACE WITH ACTUAL URL
+                wish: "Sweet Priyankaaa💫 💝 Every story has its chapters, and today begins a beautiful new one for you. May this year complete all your dreams and bring you endless happiness! ✨"
+            },
+            {
+                title: "Khairiyat - Chhichhore",
+                src: "./khar.mp3", // <--- REPLACE WITH ACTUAL URL
+                wish: "Happy Birthday, dear Priyankaaa💫 🎭 Life might have its challenges, but your strength and beauty shine through everything. Dance, sing, and celebrate - you deserve it all! 💃🎉"
+            },
+            {
+                title: "Samjhawan - Arijit Singh",
+                src: "./samjha.mp3", // <--- REPLACE WITH ACTUAL URL
+                wish: "Happy Birthday, Priyankaaa💫 🎁 Just like the soulful lyrics, may you find profound joy and meaning in this new year of your life! ✨"
+            },
+            {
+                title: "Yeh Raate Ye Mosam - Sanam",
+                src: "./ye raaten.m4a", // <--- REPLACE WITH ACTUAL URL
+                wish: "Priyankaaa💫, Happy Birthday! 🎂 May this year be as romantic and heartwarming as 'Yeh Raate Ye Mosam'. You are truly a gift! 💖"
+            },
+            {
+                title: "Tum Hi Ho - Aashiqi 2",
+                src: "./tum hi ho.mp3", // <--- REPLACE WITH ACTUAL URL
+                wish: "Happy Birthday, Priyankaaa💫 🎉 Even though this song is about pain, let's turn it into a celebration! Dance away all worries and have a fantastic day! 💃"
+            },
+            {
+                title: "Pal Lofi - Arijit Singh ",
+                src: "./pal.m4a", // <--- REPLACE WITH ACTUAL URL
+                wish: "Dear Priyankaaa💫, on your birthday, may you be as mesmerized by life's beautiful moments as this song's melody. May this new year be filled with unforgettable experiences! ✨"
+            },
+            {
+                title: "Jab Tak - MS Dhoni",
+                src: "./jab tak.m4a", // <--- REPLACE WITH ACTUAL URL
+                wish: "Happy Birthday, Priyankaaa💫 🎈 May you always have the wisdom to cherish life's beautiful journeys and moments, just like the essence of 'Jab Tak'. Wishing you a year full of adventure and happiness! 🌟"
+            }
+        ];
+
+        let currentSongIndex = 0;
+        let isPlaying = false;
+        const audioPlayer = document.getElementById('audioPlayer');
+
+        function updateSong() {
+            const currentSong = songs[currentSongIndex];
+            document.getElementById('currentSong').textContent = currentSong.title;
+            document.getElementById('currentWish').textContent = currentSong.wish;
+            
+            audioPlayer.src = currentSong.src;
+
+            // Update active song in playlist
+            const playlistItems = document.querySelectorAll('#playlist div');
+            playlistItems.forEach((item, index) => {
+                if (index === currentSongIndex) {
+                    item.classList.add('active-song');
+                    item.classList.remove('text-gray-300');
+                } else {
+                    item.classList.remove('active-song');
+                    item.classList.add('text-gray-300');
+                }
+            });
+            
+            // Add fade effect to wish card
+            const wishCard = document.getElementById('wishCard');
+            wishCard.style.opacity = '0';
+            setTimeout(() => {
+                wishCard.style.opacity = '1';
+            }, 200);
+
+            if (isPlaying) {
+                audioPlayer.play();
+            }
+        }
+
+        function togglePlay() {
+            isPlaying = !isPlaying;
+            const playIcon = document.getElementById('playIcon');
+            const visualizer = document.getElementById('musicVisualizer');
+            
+            if (isPlaying) {
+                audioPlayer.play();
+                playIcon.textContent = '⏸️';
+                visualizer.style.opacity = '1';
+            } else {
+                audioPlayer.pause();
+                playIcon.textContent = '▶️';
+                visualizer.style.opacity = '0.5';
+            }
+        }
+
+        function nextSong() {
+            isPlaying = true;
+            currentSongIndex = (currentSongIndex + 1) % songs.length;
+            updateSong();
+        }
+
+        function previousSong() {
+            isPlaying = true;
+            currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+            updateSong();
+        }
+
+        function selectSong(index) {
+            currentSongIndex = index;
+            isPlaying = true;
+            updateSong();
+        }
+
+        function blowCandles() {
+            const cake = document.getElementById('cake');
+            cake.textContent = '🍰';
+            setTimeout(() => {
+                cake.textContent = '🎂';
+            }, 2000);
+            createConfetti();
+        }
+
+        function popBalloons() {
+            const balloons = document.getElementById('balloons');
+            balloons.textContent = '💥🎊💥';
+            setTimeout(() => {
+                balloons.textContent = '🎈🎈🎈';
+            }, 2000);
+        }
+
+        function openGift() {
+            const gift = document.getElementById('gift');
+            gift.textContent = '🌟💖🌟';
+            setTimeout(() => {
+                gift.textContent = '🎁';
+            }, 2000);
+        }
+
+        function createConfetti() {
+            const confettiColors = ['🎊', '🎉', '✨', '🌟', '💖', '💕'];
+            
+            for (let i = 0; i < 20; i++) {
+                const confetti = document.createElement('div');
+                confetti.textContent = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+                confetti.style.position = 'fixed';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10px';
+                confetti.style.fontSize = '2rem';
+                confetti.style.pointerEvents = 'none';
+                confetti.style.zIndex = '1000';
+                confatti.style.animation = `fall ${2 + Math.random() * 3}s linear forwards`;
+                
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+
+        // Add falling animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fall {
+                to {
+                    transform: translateY(100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Dynamically create playlist items
+        function createPlaylist() {
+            const playlistContainer = document.getElementById('playlist');
+            songs.forEach((song, index) => {
+                const songItem = document.createElement('div');
+                songItem.textContent = song.title;
+                songItem.classList.add('cursor-pointer', 'hover:text-pink-300', 'transition-colors', 'p-2', 'rounded');
+                songItem.onclick = () => selectSong(index);
+                playlistContainer.appendChild(songItem);
+            });
+        }
+        
+        // Listen for when a song ends to play the next one
+        audioPlayer.addEventListener('ended', nextSong);
+
+        // Initialize the page
+        createPlaylist();
+        updateSong();
+    </script>
+</body>
+</html>
